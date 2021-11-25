@@ -15,7 +15,7 @@ import("keras")
 import("mclust", except = c("map"))
 importFrom("word2vec", "word2vec", "word2vec_similarity")
 importFrom("CatEncoders", "LabelEncoder.fit", "transform", "inverse.transform")
-importFrom("DeepPINCS", "multiple_sampling_generator", "seq_preprocessing")
+importFrom("DeepPINCS", "multiple_sampling_generator", "seq_preprocessing", "get_seq_encode_pad")
 importFrom("ttgsea", "sampling_generator")
 importFrom("stats", "embed", "predict")
 
