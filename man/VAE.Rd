@@ -171,7 +171,7 @@ keras::fit, keras::compile, reticulate::array_reshape, mclust::mclustBIC, mclust
 
 
 \examples{
-if (keras::is_keras_available() & reticulate::py_available()) {
+if (keras::is_keras_available() & reticulate::py_available() & reticulate::py_module_available("rpytools")) {
     data("example_luxA")
     label <- substr(example_luxA, 3, 3)
     
