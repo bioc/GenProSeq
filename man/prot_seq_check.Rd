@@ -36,5 +36,6 @@ Mukhopadhyay, C. S., Choudhary, R. K., & Iquebal, M. A. (2017). Basic Applied Bi
 }
 
 \examples{
+data("example_PTEN")
 prot_seq_check(example_PTEN[1])
 }

@@ -65,6 +65,7 @@ Chang, M. (2020). Artificial intelligence for drug development, precision medici
 
 
 \examples{
+data("example_PTEN")
 prot_seq <- example_PTEN[1:10]
 prot2vec_result <- prot2vec(prot_seq = prot_seq, embedding_dim = 8)
 vec2prot_result <- vec2prot(prot_vec = prot2vec_result$prot_vec,
