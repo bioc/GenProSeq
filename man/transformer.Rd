@@ -58,7 +58,7 @@ Liu, Z., Lin, Y., & Sun, M. (2020). Representation learning for natural language
 
 
 \examples{
-if (keras::is_keras_available() & reticulate::py_available()) {
+if (keras::is_keras_available() & reticulate::py_available() & reticulate::py_module_available("rpytools")) {
     num_AA <- 20
     length_seq <- 10
     embedding_dim <- 16
