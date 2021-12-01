@@ -1,7 +1,7 @@
 ---
 title: "Genearting Protein Sequences with Deep Generative Models"
 author: "Dongmin Jung"
-date: September 20, 2021
+date: December 1, 2021
 output:
     rmarkdown::html_document:
         highlight: pygments
@@ -63,7 +63,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
     batch_size <- 64
     
     # GAN
-    GAN_result <- fit_GAN(prot_seq = example_PTEN,
+    GAN_result <- fit_GAN(prot_seq = GenProSeq::example_PTEN,
                         length_seq = length_seq,
                         embedding_dim = embedding_dim,
                         latent_dim = latent_dim,
@@ -73,7 +73,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
                         intermediate_discriminator_layers = list(
                             layer_dense(units = 128, activation = "relu"),
                             layer_dense(units = 16, activation = "relu")),
-                        prot_seq_val = example_PTEN,
+                        prot_seq_val = GenProSeq::example_PTEN,
                         epochs = epochs,
                         batch_size = batch_size)
 }
@@ -109,7 +109,7 @@ The sequence logo of the first 20 amino acids of the real protein sequences is s
 
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
-    ggseqlogo::ggseqlogo(substr(example_PTEN, 1, 20))
+    ggseqlogo::ggseqlogo(substr(GenProSeq::example_PTEN, 1, 20))
 }
 ```
 
@@ -127,7 +127,7 @@ Consider the aligned sequences of the luxA for traing the CVAE with labels. Supp
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
     library(GenProSeq)
-    label <- substr(example_luxA, 3, 3)
+    label <- substr(GenProSeq::example_luxA, 3, 3)
     
     # model parameters
     length_seq <- 360
@@ -136,7 +136,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
     epochs <- 20
     
     # CVAE
-    VAE_result <- fit_VAE(prot_seq = example_luxA,
+    VAE_result <- fit_VAE(prot_seq = GenProSeq::example_luxA,
                         label = label,
                         length_seq = length_seq,
                         embedding_dim = embedding_dim,
@@ -145,7 +145,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
                                                             layer_dense(units = 16)),
                         intermediate_decoder_layers = list(layer_dense(units = 16),
                                                             layer_dense(units = 128)),
-                        prot_seq_val = example_luxA,
+                        prot_seq_val = GenProSeq::example_luxA,
                         label_val = label,
                         epochs = epochs,
                         batch_size = batch_size,
@@ -189,7 +189,7 @@ The sequence logo of the first 20 amino acids of the real protein sequences is s
 
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
-    ggseqlogo::ggseqlogo(substr(example_luxA, 1, 20))
+    ggseqlogo::ggseqlogo(substr(GenProSeq::example_luxA, 1, 20))
 }
 ```
 

@@ -170,7 +170,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
     batch_size <- 64
     
     # GAN
-    GAN_result <- fit_GAN(prot_seq = example_PTEN,
+    GAN_result <- fit_GAN(prot_seq = GenProSeq::example_PTEN,
                         length_seq = length_seq,
                         embedding_dim = embedding_dim,
                         latent_dim = latent_dim,
@@ -180,7 +180,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
                         intermediate_discriminator_layers = list(
                             layer_dense(units = 128, activation = "relu"),
                             layer_dense(units = 16, activation = "relu")),
-                        prot_seq_val = example_PTEN,
+                        prot_seq_val = GenProSeq::example_PTEN,
                         epochs = epochs,
                         batch_size = batch_size)
     set.seed(1)
