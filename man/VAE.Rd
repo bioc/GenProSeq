@@ -172,7 +172,8 @@ keras::fit, keras::compile, reticulate::array_reshape, mclust::mclustBIC, mclust
 
 \examples{
 if (keras::is_keras_available() & reticulate::py_available()) {
-    label <- substr(GenProSeq::example_luxA, 3, 3)
+    data("example_luxA")
+    label <- substr(example_luxA, 3, 3)
     
     # model parameters
     length_seq <- 360
@@ -181,7 +182,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
     epochs <- 2
     
     # CVAE
-    VAE_result <- fit_VAE(prot_seq = GenProSeq::example_luxA,
+    VAE_result <- fit_VAE(prot_seq = example_luxA,
                         label = label,
                         length_seq = length_seq,
                         embedding_dim = embedding_dim,
@@ -190,7 +191,7 @@ if (keras::is_keras_available() & reticulate::py_available()) {
                                                             layer_dense(units = 16)),
                         intermediate_decoder_layers = list(layer_dense(units = 16),
                                                             layer_dense(units = 128)),
-                        prot_seq_val = GenProSeq::example_luxA,
+                        prot_seq_val = example_luxA,
                         label_val = label,
                         epochs = epochs,
                         batch_size = batch_size,
