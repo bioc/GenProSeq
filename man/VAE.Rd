@@ -171,51 +171,53 @@ keras::fit, keras::compile, reticulate::array_reshape, mclust::mclustBIC, mclust
 
 
 \examples{
-label <- substr(example_luxA, 3, 3)
-
-# model parameters
-length_seq <- 360
-embedding_dim <- 8
-batch_size <- 128
-epochs <- 2
-
-# CVAE
-VAE_result <- fit_VAE(prot_seq = example_luxA,
-                    label = label,
-                    length_seq = length_seq,
-                    embedding_dim = embedding_dim,
-                    embedding_args = list(iter = 20),
-                    intermediate_encoder_layers = list(layer_dense(units = 128),
-                                                        layer_dense(units = 16)),
-                    intermediate_decoder_layers = list(layer_dense(units = 16),
-                                                        layer_dense(units = 128)),
-                    prot_seq_val = example_luxA,
-                    label_val = label,
-                    epochs = epochs,
-                    batch_size = batch_size,
-                    use_generator = FALSE,
-                    optimizer = keras::optimizer_adam(clipnorm = 0.1),
-                    callbacks = keras::callback_early_stopping(
-                        monitor = "val_loss",
-                        patience = 10,
-                        restore_best_weights = TRUE))
-gen_prot_VAE_I <- gen_VAE(VAE_result, label = rep("I", 100), num_seq = 100)
-gen_prot_VAE_L <- gen_VAE(VAE_result, label = rep("L", 100), num_seq = 100)
-
-
-### from preprocessing
-VAE_result2 <- fit_VAE(intermediate_encoder_layers = list(layer_dense(units = 128),
-                                                        layer_dense(units = 16)),
+if (keras::is_keras_available() & reticulate::py_available()) {
+    label <- substr(example_luxA, 3, 3)
+    
+    # model parameters
+    length_seq <- 360
+    embedding_dim <- 8
+    batch_size <- 128
+    epochs <- 2
+    
+    # CVAE
+    VAE_result <- fit_VAE(prot_seq = example_luxA,
+                        label = label,
+                        length_seq = length_seq,
+                        embedding_dim = embedding_dim,
+                        embedding_args = list(iter = 20),
+                        intermediate_encoder_layers = list(layer_dense(units = 128),
+                                                            layer_dense(units = 16)),
                         intermediate_decoder_layers = list(layer_dense(units = 16),
-                                                        layer_dense(units = 128)),
-                        epochs = epochs, batch_size = batch_size,
-                        preprocessing = VAE_result$preprocessing,
+                                                            layer_dense(units = 128)),
+                        prot_seq_val = example_luxA,
+                        label_val = label,
+                        epochs = epochs,
+                        batch_size = batch_size,
                         use_generator = FALSE,
                         optimizer = keras::optimizer_adam(clipnorm = 0.1),
                         callbacks = keras::callback_early_stopping(
                             monitor = "val_loss",
                             patience = 10,
                             restore_best_weights = TRUE))
-gen_prot_VAE2_I <- gen_VAE(VAE_result2, label = rep("I", 100), num_seq = 100)
-gen_prot_VAE2_L <- gen_VAE(VAE_result2, label = rep("L", 100), num_seq = 100)
+    gen_prot_VAE_I <- gen_VAE(VAE_result, label = rep("I", 100), num_seq = 100)
+    gen_prot_VAE_L <- gen_VAE(VAE_result, label = rep("L", 100), num_seq = 100)
+    
+    
+    ### from preprocessing
+    VAE_result2 <- fit_VAE(intermediate_encoder_layers = list(layer_dense(units = 128),
+                                                            layer_dense(units = 16)),
+                            intermediate_decoder_layers = list(layer_dense(units = 16),
+                                                            layer_dense(units = 128)),
+                            epochs = epochs, batch_size = batch_size,
+                            preprocessing = VAE_result$preprocessing,
+                            use_generator = FALSE,
+                            optimizer = keras::optimizer_adam(clipnorm = 0.1),
+                            callbacks = keras::callback_early_stopping(
+                                monitor = "val_loss",
+                                patience = 10,
+                                restore_best_weights = TRUE))
+    gen_prot_VAE2_I <- gen_VAE(VAE_result2, label = rep("I", 100), num_seq = 100)
+    gen_prot_VAE2_L <- gen_VAE(VAE_result2, label = rep("L", 100), num_seq = 100)
+}
 }
