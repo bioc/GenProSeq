@@ -161,7 +161,7 @@ Sun, S., Mao, L., Dong, Z., & Wu, L. (2019). Multiview machine learning. Springe
 
 
 \examples{
-if (keras::is_keras_available() & reticulate::py_available() & reticulate::py_module_available("rpytools")) {
+if (keras::is_keras_available() & reticulate::py_available(initialize = TRUE)) {
     data("example_PTEN")
     # model parameters
     length_seq <- 403
