@@ -58,23 +58,25 @@ Liu, Z., Lin, Y., & Sun, M. (2020). Representation learning for natural language
 
 
 \examples{
-if (keras::is_keras_available() & reticulate::py_available(initialize = TRUE)) {
-    num_AA <- 20
-    length_seq <- 10
-    embedding_dim <- 16
-    num_heads <- 2
-    ff_dim <- 16
-    num_transformer_blocks <- 2
-    
-    inputs <- layer_input(shape = length_seq)
-    x <- inputs \%>\%
-        layer_embedding_token_position(maxlen = length_seq,
-                                    vocab_size = num_AA,
-                                    embed_dim = embedding_dim) \%>\%
-        layer_transformer_encoder(embed_dim = embedding_dim,
-                                num_heads = num_heads,
-                                ff_dim = ff_dim,
-                                num_transformer_blocks = num_transformer_blocks) \%>\%
-        layer_global_average_pooling_1d()
+if (reticulate::py_available()) {
+    if (keras::is_keras_available()) {
+        num_AA <- 20
+        length_seq <- 10
+        embedding_dim <- 16
+        num_heads <- 2
+        ff_dim <- 16
+        num_transformer_blocks <- 2
+        
+        inputs <- layer_input(shape = length_seq)
+        x <- inputs \%>\%
+            layer_embedding_token_position(maxlen = length_seq,
+                                        vocab_size = num_AA,
+                                        embed_dim = embedding_dim) \%>\%
+            layer_transformer_encoder(embed_dim = embedding_dim,
+                                    num_heads = num_heads,
+                                    ff_dim = ff_dim,
+                                    num_transformer_blocks = num_transformer_blocks) \%>\%
+            layer_global_average_pooling_1d()
+    }
 }
 }
