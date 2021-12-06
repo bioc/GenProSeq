@@ -171,6 +171,7 @@ keras::fit, keras::compile, reticulate::array_reshape, mclust::mclustBIC, mclust
 
 
 \examples{
+reticulate::py_config()
 if (reticulate::py_available()) {
     if (keras::is_keras_available()) {
         data("example_luxA")

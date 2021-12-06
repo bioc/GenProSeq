@@ -165,6 +165,7 @@ keras::fit, keras::compile, ttgsea::sampling_generator, DeepPINCS::multiple_samp
 
 
 \examples{
+reticulate::py_config()
 if (reticulate::py_available()) {
     if (keras::is_keras_available()) {
         prot_seq <- DeepPINCS::SARS_CoV2_3CL_Protease

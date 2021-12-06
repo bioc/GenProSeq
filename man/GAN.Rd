@@ -161,6 +161,7 @@ Sun, S., Mao, L., Dong, Z., & Wu, L. (2019). Multiview machine learning. Springe
 
 
 \examples{
+reticulate::py_config()
 if (reticulate::py_available()) {
     if (keras::is_keras_available()) {
         data("example_PTEN")
