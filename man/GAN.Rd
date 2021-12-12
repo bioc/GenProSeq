@@ -161,46 +161,43 @@ Sun, S., Mao, L., Dong, Z., & Wu, L. (2019). Multiview machine learning. Springe
 
 
 \examples{
-reticulate::py_config()
-if (reticulate::py_available()) {
-    if (keras::is_keras_available()) {
-        data("example_PTEN")
-        # model parameters
-        length_seq <- 403
-        embedding_dim <- 8
-        latent_dim <- 4
-        epochs <- 2
-        batch_size <- 64
-        
-        # GAN
-        GAN_result <- fit_GAN(prot_seq = example_PTEN,
-                            length_seq = length_seq,
-                            embedding_dim = embedding_dim,
-                            latent_dim = latent_dim,
+if (keras::is_keras_available() & reticulate::py_available()) {
+    data("example_PTEN")
+    # model parameters
+    length_seq <- 403
+    embedding_dim <- 8
+    latent_dim <- 4
+    epochs <- 2
+    batch_size <- 64
+    
+    # GAN
+    GAN_result <- fit_GAN(prot_seq = example_PTEN,
+                        length_seq = length_seq,
+                        embedding_dim = embedding_dim,
+                        latent_dim = latent_dim,
+                        intermediate_generator_layers = list(
+                            layer_dense(units = 16),
+                            layer_dense(units = 128)),
+                        intermediate_discriminator_layers = list(
+                            layer_dense(units = 128, activation = "relu"),
+                            layer_dense(units = 16, activation = "relu")),
+                        prot_seq_val = example_PTEN,
+                        epochs = epochs,
+                        batch_size = batch_size)
+    set.seed(1)
+    gen_prot_GAN <- gen_GAN(GAN_result, num_seq = 100)
+    
+    
+    ### from preprocessing
+    GAN_result2 <- fit_GAN(preprocessing = GAN_result$preprocessing,
                             intermediate_generator_layers = list(
                                 layer_dense(units = 16),
                                 layer_dense(units = 128)),
                             intermediate_discriminator_layers = list(
                                 layer_dense(units = 128, activation = "relu"),
                                 layer_dense(units = 16, activation = "relu")),
-                            prot_seq_val = example_PTEN,
                             epochs = epochs,
                             batch_size = batch_size)
-        set.seed(1)
-        gen_prot_GAN <- gen_GAN(GAN_result, num_seq = 100)
-        
-        
-        ### from preprocessing
-        GAN_result2 <- fit_GAN(preprocessing = GAN_result$preprocessing,
-                                intermediate_generator_layers = list(
-                                    layer_dense(units = 16),
-                                    layer_dense(units = 128)),
-                                intermediate_discriminator_layers = list(
-                                    layer_dense(units = 128, activation = "relu"),
-                                    layer_dense(units = 16, activation = "relu")),
-                                epochs = epochs,
-                                batch_size = batch_size)
-        gen_prot_GAN <- gen_GAN(GAN_result2, num_seq = 100)
-    }
+    gen_prot_GAN <- gen_GAN(GAN_result2, num_seq = 100)
 }
 }

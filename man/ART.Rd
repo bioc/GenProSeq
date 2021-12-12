@@ -165,68 +165,65 @@ keras::fit, keras::compile, ttgsea::sampling_generator, DeepPINCS::multiple_samp
 
 
 \examples{
-reticulate::py_config()
-if (reticulate::py_available()) {
-    if (keras::is_keras_available()) {
-        prot_seq <- DeepPINCS::SARS_CoV2_3CL_Protease
-        
-        # model parameters
-        length_seq <- 10
-        embedding_dim <- 16
-        num_heads <- 2
-        ff_dim <- 16
-        num_transformer_blocks <- 2
-        batch_size <- 32
-        epochs <- 2
-        
-        # ART
-        ART_result <- fit_ART(prot_seq = prot_seq,
-                            length_seq = length_seq,
-                            embedding_dim = embedding_dim,
-                            num_heads = num_heads,
-                            ff_dim = ff_dim,
-                            num_transformer_blocks = num_transformer_blocks,
-                            layers = list(layer_dropout(rate = 0.1),
-                                        layer_dense(units = 32, activation = "relu"),
-                                        layer_dropout(rate = 0.1)),
-                            prot_seq_val = prot_seq,
-                            epochs = epochs,
-                            batch_size = batch_size,
-                            use_generator = TRUE,
-                            callbacks = callback_early_stopping(
+if (keras::is_keras_available() & reticulate::py_available()) {
+    prot_seq <- DeepPINCS::SARS_CoV2_3CL_Protease
+    
+    # model parameters
+    length_seq <- 10
+    embedding_dim <- 16
+    num_heads <- 2
+    ff_dim <- 16
+    num_transformer_blocks <- 2
+    batch_size <- 32
+    epochs <- 2
+    
+    # ART
+    ART_result <- fit_ART(prot_seq = prot_seq,
+                        length_seq = length_seq,
+                        embedding_dim = embedding_dim,
+                        num_heads = num_heads,
+                        ff_dim = ff_dim,
+                        num_transformer_blocks = num_transformer_blocks,
+                        layers = list(layer_dropout(rate = 0.1),
+                                    layer_dense(units = 32, activation = "relu"),
+                                    layer_dropout(rate = 0.1)),
+                        prot_seq_val = prot_seq,
+                        epochs = epochs,
+                        batch_size = batch_size,
+                        use_generator = TRUE,
+                        callbacks = callback_early_stopping(
+                            monitor = "val_loss",
+                            patience = 10,
+                            restore_best_weights = TRUE))
+    
+    seed_prot <- "SGFRKMAFPS"
+    gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy")
+    gen_ART(ART_result, seed_prot, length_AA = 20, method = "beam", b = 5)
+    gen_ART(ART_result, seed_prot, length_AA = 20, method = "temperature", t = 0.1)
+    gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_k", k = 3)
+    gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_p", p = 0.75)
+    
+    
+    ### from preprocessing
+    ART_result2 <- fit_ART(num_heads = 4,
+                        ff_dim = 32,
+                        num_transformer_blocks = 3,
+                        layers = list(layer_dropout(rate=0.1),
+                                    layer_dense(units=32, activation="relu"),
+                                    layer_dropout(rate=0.1)),
+                        epochs = epochs,
+                        batch_size = batch_size,
+                        preprocessing = ART_result$preprocessing,
+                        use_generator = TRUE,
+                        callbacks = callback_early_stopping(
                                 monitor = "val_loss",
-                                patience = 10,
+                                patience = 50,
                                 restore_best_weights = TRUE))
-        
-        seed_prot <- "SGFRKMAFPS"
-        gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy")
-        gen_ART(ART_result, seed_prot, length_AA = 20, method = "beam", b = 5)
-        gen_ART(ART_result, seed_prot, length_AA = 20, method = "temperature", t = 0.1)
-        gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_k", k = 3)
-        gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_p", p = 0.75)
-        
-        
-        ### from preprocessing
-        ART_result2 <- fit_ART(num_heads = 4,
-                            ff_dim = 32,
-                            num_transformer_blocks = 3,
-                            layers = list(layer_dropout(rate=0.1),
-                                        layer_dense(units=32, activation="relu"),
-                                        layer_dropout(rate=0.1)),
-                            epochs = epochs,
-                            batch_size = batch_size,
-                            preprocessing = ART_result$preprocessing,
-                            use_generator = TRUE,
-                            callbacks = callback_early_stopping(
-                                    monitor = "val_loss",
-                                    patience = 50,
-                                    restore_best_weights = TRUE))
-        
-        gen_ART(ART_result2, seed_prot, length_AA = 20, method = "greedy")
-        gen_ART(ART_result2, seed_prot, length_AA = 20, method = "beam", b = 5)
-        gen_ART(ART_result2, seed_prot, length_AA = 20, method = "temperature", t = 0.1)
-        gen_ART(ART_result2, seed_prot, length_AA = 20, method = "top_k", k = 3)
-        gen_ART(ART_result2, seed_prot, length_AA = 20, method = "top_p", p = 0.75)
-    }
+    
+    gen_ART(ART_result2, seed_prot, length_AA = 20, method = "greedy")
+    gen_ART(ART_result2, seed_prot, length_AA = 20, method = "beam", b = 5)
+    gen_ART(ART_result2, seed_prot, length_AA = 20, method = "temperature", t = 0.1)
+    gen_ART(ART_result2, seed_prot, length_AA = 20, method = "top_k", k = 3)
+    gen_ART(ART_result2, seed_prot, length_AA = 20, method = "top_p", p = 0.75)
 }
 }
