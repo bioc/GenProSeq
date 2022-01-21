@@ -1,7 +1,7 @@
 ---
-title: "Genearting Protein Sequences with Deep Generative Models"
+title: "Generating Protein Sequences with Deep Generative Models"
 author: "Dongmin Jung"
-date: December 1, 2021
+date: January 21, 2022
 output:
     rmarkdown::html_document:
         highlight: pygments
