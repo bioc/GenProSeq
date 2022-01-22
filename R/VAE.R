@@ -18,7 +18,6 @@ fit_VAE <- function(prot_seq,
                         y_val = NULL,
                         lenc = NULL,
                         length_seq = NULL,
-                        num_seq = NULL,
                         embedding_dim = NULL,
                         embedding_matrix = NULL,
                         removed_prot_seq = NULL,
@@ -46,8 +45,6 @@ fit_VAE <- function(prot_seq,
         y_val <- preprocessing$y_val
         length_seq <- preprocessing$length_seq
         if (is.null(length_seq)) stop("check length of sequence in the preprocessed result")
-        num_seq <- preprocessing$num_seq
-        if (is.null(num_seq)) stop("check number of sequences for train in the preprocessed result")
         embedding_dim <- preprocessing$embedding_dim
         if (is.null(embedding_dim)) stop("check dimension of the dense embedding in the preprocessed result")
         embedding_matrix <- preprocessing$embedding_matrix

@@ -90,7 +90,7 @@ batch size
 }
     \item{preprocessing}{
 list of preprocessed results, they are set to NULL as default
-x_train, length_seq, num_seq, embedding_dim and embedding_matrix must be required for training
+x_train, length_seq, embedding_dim and embedding_matrix must be required for training
 \itemize{
     \item x_train : embedded sequence data for train
     \item x_val : embedded sequence data for validation
@@ -98,7 +98,6 @@ x_train, length_seq, num_seq, embedding_dim and embedding_matrix must be require
     \item y_val : labels for validation
     \item lenc : encoded labels
     \item length_seq : length of sequence
-    \item num_seq : number of sequences for train
     \item embedding_dim : dimension of the dense embedding
     \item embedding_matrix : embedding matrix
     \item removed_prot_seq : index for removed protein sequences while checking
