@@ -84,6 +84,7 @@ batch size
 }
     \item{preprocessing}{
 list of preprocessed results, they are set to NULL as default
+x_train, length_seq, num_seq, embedding_dim and embedding_matrix must be required for training
 \itemize{
     \item x_train : embedded sequence data for train
     \item x_val : embedded sequence data for validation

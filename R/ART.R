@@ -34,13 +34,19 @@ fit_ART <- function(prot_seq,
     if (all(unlist(lapply(preprocessing, Negate(is.null))))) {
         result$preprocessing <- preprocessing
         x_train <- preprocessing$x_train
+        if (is.null(x_train)) stop("check embedded sequence data for train in the preprocessed result")
         x_val <- preprocessing$x_val
         y_train <- preprocessing$y_train
+        if (is.null(y_train)) stop("check labels for train in the preprocessed result")
         y_val <- preprocessing$y_val
         length_seq <- preprocessing$length_seq
+        if (is.null(length_seq)) stop("check length of sequence in the preprocessed result")
         embedding_dim <- preprocessing$embedding_dim
+        if (is.null(embedding_dim)) stop("check dimension of the dense embedding in the preprocessed result")
         lenc <- preprocessing$lenc
+        if (is.null(lenc)) stop("check encoded labels in the preprocessed result")
         num_AA <- preprocessing$num_AA
+        if (is.null(num_AA)) stop("check number of amino acids in the preprocessed result")
         if (embedding_dim %% num_heads != 0) {
             stop("the embedding dimension is a multiple of the number of attention heads")
         }
@@ -176,6 +182,9 @@ fit_ART <- function(prot_seq,
 
 gen_ART <- function(x, seed_prot, length_AA, method = NULL,
                     b = NULL, t = 1, k = NULL, p = NULL) {
+    
+    checked_seed_prot <- prot_seq_check(prot_seq = seed_prot)
+    if (length(checked_seed_prot$prot_seq) == 0) stop("seed protein is not valid")
     model <- x$model
     length_seq <- x$preprocessing$length_seq
     lenc <- x$preprocessing$lenc
@@ -184,7 +193,7 @@ gen_ART <- function(x, seed_prot, length_AA, method = NULL,
     
     ### generating
     message("generating...")
-    temp_prot = prot <- seed_prot
+    temp_prot <- prot <- checked_seed_prot$prot_seq
     X <- DeepPINCS::get_seq_encode_pad(temp_prot, length_seq = length_seq, lenc = lenc)$sequences_encode_pad
     for (i in seq_len(length_AA)) {
         pred <- predict(model, rbind(X))

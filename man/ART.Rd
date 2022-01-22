@@ -80,14 +80,15 @@ batch size
 }
     \item{preprocessing}{
 list of preprocessed results, they are set to NULL as default
+x_train, y_train, lenc, length_seq, num_AA, and embedding_dim must be required for training
 \itemize{
-    \item x_train : embedded sequence data for train
-    \item x_val : embedded sequence data for validation
+    \item x_train : embedded sequence data for train, result of the function "DeepPINCS::get_seq_encode_pad"
+    \item x_val : embedded sequence data for validation, result of the function "DeepPINCS::get_seq_encode_pad"
     \item y_train : labels for train
     \item y_val : labels for validation
-    \item lenc : encoded labels
+    \item lenc : encoded labels, result of the function "DeepPINCS::get_seq_encode_pad"
     \item length_seq : length of sequence
-    \item num_AA : number of amino acids
+    \item num_AA : number of amino acids, result of the function "DeepPINCS::get_seq_encode_pad"
     \item embedding_dim : dimension of the dense embedding
     \item removed_prot_seq : index for removed protein sequences while checking
     \item removed_prot_seq_val : index for removed protein sequences of validation
@@ -112,7 +113,7 @@ additional parameters for the "fit"
 result of the function "fit_ART"
 }
     \item{seed_prot}{
-sequence to be used as seed proteins
+sequence to be used as a seed protein
 }
     \item{length_AA}{
 length of amino acids to be generated
@@ -124,7 +125,7 @@ length of amino acids to be generated
 beam size in the beam search
 }
     \item{t}{
-temperature in the temperature sampleing
+temperature in the temperature sampling (default: 1)
 }
     \item{k}{
 number of amino acids in the top-k sampling

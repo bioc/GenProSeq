@@ -7,7 +7,7 @@ Variational autoencoder for generating protein sequences
 }
 
 \description{
-The variational autoencoder (VAE) is a class of autoencoder where the encoder module is used to learn the parameter of a distribution and the decoder is used to generate examples from samples drawn from the learned distribution. The conditional variational autoencoder (CAVE) is designed to generate desired samples by including additional conditioning information. Since there may be underlying distinctions between groups of samples, the Gaussian mixture model is used for sequence generation. The Word2vec is applied to amino acids for embedding. The VAE or CVAE model can be trained by the function "fit_VAE", and then the function "gen_VAE" generates protein sequences from the trained model.
+The variational autoencoder (VAE) is a class of autoencoder where the encoder module is used to learn the parameter of a distribution and the decoder is used to generate examples from samples drawn from the learned distribution. The conditional variational autoencoder (CVAE) is designed to generate desired samples by including additional conditioning information. Since there may be underlying distinctions between groups of samples, the Gaussian mixture model is used for sequence generation. The Word2vec is applied to amino acids for embedding. The VAE or CVAE model can be trained by the function "fit_VAE", and then the function "gen_VAE" generates protein sequences from the trained model.
 }
 
 \usage{
@@ -90,6 +90,7 @@ batch size
 }
     \item{preprocessing}{
 list of preprocessed results, they are set to NULL as default
+x_train, length_seq, num_seq, embedding_dim and embedding_matrix must be required for training
 \itemize{
     \item x_train : embedded sequence data for train
     \item x_val : embedded sequence data for validation
