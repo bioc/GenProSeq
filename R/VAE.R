@@ -103,7 +103,7 @@ fit_VAE <- function(prot_seq,
         }
     },
         error = function(e)
-        message(paste("error in pre-processing : ", e))
+        message("In pre-processing : ", e)
     )
     
     
@@ -182,7 +182,7 @@ fit_VAE <- function(prot_seq,
         model %>% keras::compile(optimizer = optimizer, loss = vae_loss)
     },
         error = function(e)
-        message(paste("error in building model : ", e))
+        message("In building model : ", e)
     )
     
     
@@ -273,7 +273,7 @@ fit_VAE <- function(prot_seq,
         }
     },
         error = function(e)
-        message(paste("error in training : ", e))
+        message("In training : ", e)
     )
     
     rm(z_mean, envir = globalenv())
@@ -368,7 +368,7 @@ gen_VAE <- function(x, label = NULL, num_seq, remove_gap = TRUE,
         }
     },
         error = function(e)
-        message(paste("error in generating : ", e))
+        message("In generating : ", e)
     )
     
     
@@ -387,7 +387,7 @@ gen_VAE <- function(x, label = NULL, num_seq, remove_gap = TRUE,
         }
     },
         error = function(e)
-        message(paste("error in post-processing : ", e))
+        message("In post-processing : ", e)
     )
     
     result$gen_seq <- gen_seq

@@ -107,7 +107,7 @@ fit_ART <- function(prot_seq,
         }
     },
         error = function(e)
-        message(paste("error in pre-processing : ", e))
+        message("In pre-processing : ", e)
     )
     
     
@@ -138,7 +138,7 @@ fit_ART <- function(prot_seq,
                         metrics = metrics)
     },
         error = function(e)
-        message(paste("error in building model : ", e))
+        message("In building model : ", e)
     )
     
     
@@ -176,7 +176,7 @@ fit_ART <- function(prot_seq,
         }
     },
         error = function(e)
-        message(paste("error in training : ", e))
+        message("In training : ", e)
     )
     
     result$preprocessing$x_train <- x_train
@@ -269,6 +269,6 @@ gen_ART <- function(x, seed_prot, length_AA, method = NULL,
         prot
     },
         error = function(e)
-        message(paste("error in generating : ", e))
+        message("In generating : ", e)
     )
 }
