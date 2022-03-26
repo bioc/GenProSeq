@@ -20,7 +20,7 @@ The Transformer architecture demonstrates impressive text generation capabilitie
 
 ## Installation
 
-Fro this package, it is required to install tensorflow and kears in Python and connect to R (https://tensorflow.rstudio.com, https://keras.rstudio.com).
+For this package, it is required to install tensorflow and kears in python and connect to R (https://tensorflow.rstudio.com, https://keras.rstudio.com). This package is currently available for tensorflow 2.8.0, keras 2.8.0, and python 3.9.9. However, it will be maintained to keep up with changes.
 To install the development version from GitHub:
 ``` 
 devtools::install_github("dongminjung/GenProSeq")
