@@ -1,7 +1,7 @@
 ---
 title: "Generating Protein Sequences with Deep Generative Models"
 author: "Dongmin Jung"
-date: January 21, 2022
+date: April 12, 2022
 output:
     rmarkdown::html_document:
         highlight: pygments
@@ -255,16 +255,16 @@ The learned autoregressive model generates new sequences of proteins. After the 
 if (keras::is_keras_available() & reticulate::py_available()) {
     set.seed(1)
     seed_prot <- "SGFRKMAFPS"
-    gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy")
-    substr(prot_seq, 1, 30)
-    gen_ART(ART_result, seed_prot, length_AA = 20, method = "beam", b = 5)
-    substr(prot_seq, 1, 30)
-    gen_ART(ART_result, seed_prot, length_AA = 20, method = "temperature", t = 0.1)
-    substr(prot_seq, 1, 30)
-    gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_k", k = 3)
-    substr(prot_seq, 1, 30)
-    gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_p", p = 0.75)
-    substr(prot_seq, 1, 30)
+    print(gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy"))
+    print(substr(prot_seq, 1, 30))
+    print(gen_ART(ART_result, seed_prot, length_AA = 20, method = "beam", b = 5))
+    print(substr(prot_seq, 1, 30))
+    print(gen_ART(ART_result, seed_prot, length_AA = 20, method = "temperature", t = 0.1))
+    print(substr(prot_seq, 1, 30))
+    print(gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_k", k = 3))
+    print(substr(prot_seq, 1, 30))
+    print(gen_ART(ART_result, seed_prot, length_AA = 20, method = "top_p", p = 0.75))
+    print(substr(prot_seq, 1, 30))
 }
 ```
 
@@ -272,14 +272,14 @@ We can compute pairwise similarities between the real and generated protein sequ
 
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
-    stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy"),
-                        substr(prot_seq, 1, 30))
-    stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 30, method = "greedy"),
-                        substr(prot_seq, 1, 40))
-    stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 40, method = "greedy"),
-                        substr(prot_seq, 1, 50))
-    stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 50, method = "greedy"),
-                        substr(prot_seq, 1, 60))
+    print(stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 20, method = "greedy"),
+                        substr(prot_seq, 1, 30)))
+    print(stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 30, method = "greedy"),
+                        substr(prot_seq, 1, 40)))
+    print(stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 40, method = "greedy"),
+                        substr(prot_seq, 1, 50)))
+    print(stringdist::stringsim(gen_ART(ART_result, seed_prot, length_AA = 50, method = "greedy"),
+                        substr(prot_seq, 1, 60)))
 }
 ```
 
