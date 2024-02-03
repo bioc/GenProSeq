@@ -102,7 +102,9 @@ In a graphical manner, a sequence logo shows the probability of occurrence for e
 if (keras::is_keras_available() & reticulate::py_available()) {
     set.seed(1)
     gen_prot_GAN <- gen_GAN(GAN_result, num_seq = 100)
-    ggseqlogo::ggseqlogo(substr(gen_prot_GAN$gen_seq, 1, 20))
+    if (require(ggseqlogo)) {
+        ggseqlogo::ggseqlogo(substr(gen_prot_GAN$gen_seq, 1, 20))
+    }
 }
 ```
 
@@ -110,7 +112,9 @@ The sequence logo of the first 20 amino acids of the real protein sequences is s
 
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
-    ggseqlogo::ggseqlogo(substr(example_PTEN, 1, 20))
+    if (require(ggseqlogo)) {
+        ggseqlogo::ggseqlogo(substr(example_PTEN, 1, 20))
+    }
 }
 ```
 
@@ -174,7 +178,9 @@ The sequence logo of the first 20 amino acids of the generated protein sequences
 if (keras::is_keras_available() & reticulate::py_available()) {
     set.seed(1)
     gen_prot_VAE <- gen_VAE(VAE_result, label = rep("I", 100), num_seq = 100)
-    ggseqlogo::ggseqlogo(substr(gen_prot_VAE$gen_seq, 1, 20))
+    if (require(ggseqlogo)) {
+        ggseqlogo::ggseqlogo(substr(gen_prot_VAE$gen_seq, 1, 20))
+    }
 }
 ```
 
@@ -183,7 +189,9 @@ The sequence logo of the first 20 amino acids of the generated protein sequences
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
     gen_prot_VAE <- gen_VAE(VAE_result, label = rep("L", 100), num_seq = 100)
-    ggseqlogo::ggseqlogo(substr(gen_prot_VAE$gen_seq, 1, 20))
+    if (require(ggseqlogo)) {
+        ggseqlogo::ggseqlogo(substr(gen_prot_VAE$gen_seq, 1, 20))
+    }
 }
 ```
 
@@ -191,7 +199,9 @@ The sequence logo of the first 20 amino acids of the real protein sequences is s
 
 ```{r, eval=TRUE}
 if (keras::is_keras_available() & reticulate::py_available()) {
-    ggseqlogo::ggseqlogo(substr(example_luxA, 1, 20))
+    if (require(ggseqlogo)) {
+        ggseqlogo::ggseqlogo(substr(example_luxA, 1, 20))
+    }
 }
 ```
 
