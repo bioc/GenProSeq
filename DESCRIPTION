@@ -13,3 +13,4 @@ License: Artistic-2.0
 biocViews: Software, Proteomics
 NeedsCompilation: no
 VignetteBuilder: knitr
+Config/Bioconductor/UnsupportedPlatforms: windows
